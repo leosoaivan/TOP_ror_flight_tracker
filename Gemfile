@@ -10,12 +10,11 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-
 gem 'puma', '~> 3.4'
 
 group :development, :test do
-  gem 'byebug'
   gem 'sqlite3', '~> 1.3', '>= 1.3.13'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
@@ -25,3 +24,19 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
 end
 
+group :test do
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
+  gem 'capybara', '~> 2.14'
+  gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
+  gem 'launchy', '~> 2.4', '>= 2.4.3'
+  gem 'selenium-webdriver', '~> 3.4'
+  gem 'rails-controller-testing'
+end
+
+group :production do
+  gem 'pg'
+end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
