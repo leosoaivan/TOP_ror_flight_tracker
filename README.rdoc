@@ -18,6 +18,7 @@ TO-DO
 
 ## Built With
 * [Ruby on Rails](http://rubyonrails.org/) - Web framework
+* [Rspec](http://rspec.info) - Test suite
 
 ## Contributing
 1. Fork it!
