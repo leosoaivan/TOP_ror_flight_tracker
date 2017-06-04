@@ -5,3 +5,21 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+codes = ["ATL", "ORD", "LAX", "DFW", "JFK", "DEN", "SFO", "LAS", "CLT", "MIA"]
+names = [
+  "Hartsfield-Jackson Atlanta",
+  "Chicago O'Hare",
+  "Los Angeles",
+  "Dallas/Fort Worth",
+  "John F. Kennedy",
+  "Denver",
+  "San Francisco",
+  "McCarran",
+  "Charlotte Douglas",
+  "Miami"
+]
+
+codes.size.times do |count|
+  Airport.new(code: codes[count], name: names[count])
+end
