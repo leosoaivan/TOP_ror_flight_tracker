@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Airport.delete_all
+Flight.delete_all
+
 codes = ["ATL", "ORD", "LAX", "DFW", "JFK", "DEN", "SFO", "LAS", "CLT", "MIA"]
 names = [
   "Hartsfield-Jackson Atlanta",
@@ -21,5 +24,18 @@ names = [
 ]
 
 codes.size.times do |count|
-  Airport.new(code: codes[count], name: names[count])
+  Airport.create(code: "#{codes[count]}", name: "#{names[count]}")
 end
+
+airports = Airport.all
+
+50.times do |count|
+  airports = Airport.all.sample(2)
+  Flight.create(
+    departing: airports.first,
+    arriving: airports.second,
+    duration: 21_600 + rand(1000) * 10,
+    date: Date.today.beginning_of_day + rand(10).day
+  )
+end
+
