@@ -10,7 +10,6 @@ class FlightsController < ApplicationController
     end
 
     unless @chosen_flight.empty?
-      puts @chosen_flight
       render :index
     else
       @message = "No such flights"

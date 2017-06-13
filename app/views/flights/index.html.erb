@@ -9,7 +9,7 @@
   <%= f.select(:passengers, 1..4) %>
 
   Date:
-  <%= f.select(:date, options_from_collection_for_select(Flight.select(:date).order(:date).distinct, :date, :flight_date_formatted)) %>
+  <%= f.collection_select :date, Flight.select(:date).order(:date).distinct, :date, :flight_date_formatted %>
 
   <%= f.submit "Find a flight" %>
 <% end %>
