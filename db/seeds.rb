@@ -29,13 +29,13 @@ end
 
 airports = Airport.all
 
-50.times do |count|
+100.times do |count|
   airports = Airport.all.sample(2)
   Flight.create(
     departing: airports.first,
     arriving: airports.second,
     duration: 21_600 + rand(1000) * 10,
-    date: Date.today.beginning_of_day + rand(10).day
+    date: Date.today.beginning_of_day + rand(5).day
   )
 end
 

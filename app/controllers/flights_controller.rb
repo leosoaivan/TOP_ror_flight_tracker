@@ -9,7 +9,7 @@ class FlightsController < ApplicationController
       )
     end
 
-    if @chosen_flight.exists?
+    unless @chosen_flight.empty?
       puts @chosen_flight
       render :index
     else
