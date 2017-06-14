@@ -15,6 +15,7 @@ gem 'puma', '~> 3.4'
 group :development, :test do
   gem 'sqlite3', '~> 1.3', '>= 1.3.13'
   gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
 end
 
 group :development do
