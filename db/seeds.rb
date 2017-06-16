@@ -35,7 +35,7 @@ airports = Airport.all
     departing: airports.first,
     arriving: airports.second,
     duration: 21_600 + rand(1000) * 10,
-    date: Date.today.beginning_of_day + rand(5).day
+    date: DateTime.new(2017, 12, 20) + rand(5).day
   )
 end
 

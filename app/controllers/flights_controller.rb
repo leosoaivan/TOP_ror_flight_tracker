@@ -7,6 +7,7 @@ class FlightsController < ApplicationController
         arriving_id:  params[:flight][:arriving_id],
         date:         Time.zone.parse(params[:flight][:date])
       )
+      puts params[:flight][:date]
 
       unless @chosen_flights.nil?
         render :index
