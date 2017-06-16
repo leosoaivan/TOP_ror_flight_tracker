@@ -41,7 +41,7 @@ RSpec.describe Flight, type: :model do
 
   # See Flight model for notes
   describe ".distinct_dates" do
-    it "returns an ActiveRecord::Relation with unique and sorted dates" do
+    it "returns an ActiveRecord::Relation" do
       expect(Flight.distinct_dates).to be_an(ActiveRecord::Relation)
     end
 
@@ -50,7 +50,7 @@ RSpec.describe Flight, type: :model do
       expect(flights).to include(flight.date, flight2.date)
     end
   end
-  
+
   # See Flight model for notes
   describe "#flight_date_formatted" do
     it "formats Date/Time to a mm/dd/yyyy String" do

@@ -27,8 +27,6 @@ codes.size.times do |count|
   Airport.create(code: "#{codes[count]}", name: "#{names[count]}")
 end
 
-airports = Airport.all
-
 100.times do |count|
   airports = Airport.all.sample(2)
   Flight.create(
