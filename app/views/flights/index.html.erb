@@ -9,17 +9,17 @@
   <%= f.select(:passengers, 1..4) %>
 
   Date:
-  <%= f.collection_select :date, Flight.select(:date).order(:date).distinct, :date, :flight_date_formatted %>
+  <%= f.collection_select :date, Flight.distinct_dates, :date, :flight_date_formatted %>
 
   <%= f.submit "Find a flight" %>
 <% end %>
 
-<% unless @chosen_flight.empty? %>
-  <% @chosen_flight.each do |f| %>
-    <%= f.departing_id %>
-    <%= f.arriving_id %>
-    <%= f.date.to_s %>
+<% if @chosen_flights %>
+  <% @chosen_flights.each do |flight| %>
+    <p>
+      <%= flight.departing_id %>
+      <%= flight.arriving_id %>
+      <%= flight.date.to_s %>
+    </p>
   <% end %>
-<% else %>
-  <%= @message %>
 <% end %>
