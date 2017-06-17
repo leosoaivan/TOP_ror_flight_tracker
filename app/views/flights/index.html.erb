@@ -1,17 +1,17 @@
-<%= form_tag :flight, method: :get do |f| %>
+<%= form_tag('/flights', method: :get) do %>
   Departing: 
-  <%= f.collection_select :departing_id, Airport.all, :id, :code %>
+  <%= collection_select :flight, :departing_id, Airport.all, :id, :code %>
   
   Destination:
-  <%= f.collection_select :arriving_id, Airport.all, :id, :code %>
+  <%= collection_select :flight, :arriving_id, Airport.all, :id, :code %>
 
   Passengers:
-  <%= f.select(:passengers, 1..4) %>
+  <%= select_tag(:passengers, 1..4) %>
 
   Date:
-  <%= f.collection_select :date, Flight.distinct_dates, :date, :flight_date_formatted %>
+  <%= collection_select :flight, :date, Flight.distinct_dates, :date, :flight_date_formatted %>
 
-  <%= f.submit "Find a flight" %>
+  <%= submit_tag "Find a flight" %>
 <% end %>
 
 <% if @chosen_flights %>
