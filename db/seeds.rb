@@ -33,7 +33,8 @@ end
     departing: airports.first,
     arriving: airports.second,
     duration: 21_600 + rand(1000) * 10,
-    date: DateTime.new(2017, 12, 20) + rand(5).day
+    date: DateTime.new(2017, 12, 20) + rand(5).day,
+    time: Time.new + rand(24).hour
   )
 end
 

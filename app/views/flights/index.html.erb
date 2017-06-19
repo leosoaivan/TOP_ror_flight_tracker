@@ -6,7 +6,7 @@
   <%= collection_select :flight, :arriving_id, Airport.all, :id, :code %>
 
   Passengers:
-  <%= select_tag(:passengers, 1..4) %>
+  <%= select :flight, :passengers, (1..4) %>
 
   Date:
   <%= collection_select :flight, :date, Flight.distinct_dates, :date, :flight_date_formatted %>
@@ -21,5 +21,17 @@
       <%= flight.arriving_id %>
       <%= flight.date.to_s %>
     </p>
+  <% end %>
+<% end %>
+
+<% if @flights %>
+  <%= form_tag('bookings/new', method: :get) do %>
+    <%= hidden_field_tag(:passengers, params[:flight][:passengers]) %>
+    <%= collection_radio_buttons(:booking, :flight_id, @flights, :id, :date) do |b| %>
+      <%= b.radio_button %>
+      <%= b.object.duration %>
+      <%= b.object.date %>
+    <% end %>
+    <%= submit_tag "Accept this flight" %>
   <% end %>
 <% end %>
