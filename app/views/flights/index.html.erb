@@ -14,8 +14,8 @@
   <%= submit_tag "Find a flight" %>
 <% end %>
 
-<% if @chosen_flights %>
-  <% @chosen_flights.each do |flight| %>
+<% if @flights %>
+  <% @flights.each do |flight| %>
     <p>
       <%= flight.departing_id %>
       <%= flight.arriving_id %>

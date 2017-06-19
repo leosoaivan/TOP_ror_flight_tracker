@@ -22,20 +22,37 @@ RSpec.describe FlightsController, type: :controller do
     duration: 255_000
   )}
 
-  let (:flight_params) { { flight: { departing_id: flight1.departing_id,
-                                   arriving_id:  flight1.arriving_id, 
-                                   date:         flight1.date } } }
+  let (:matching_flight) { 
+    { flight: { departing_id: flight1.departing_id,
+                arriving_id:  flight1.arriving_id, 
+                date:         flight1.date } } }
 
+  let (:nonmatching_flight) { 
+    { flight: { departing_id: 1,
+                arriving_id:  1, 
+                date:         Date.new(2017, 1, 1) } } }
+  
   describe "GET #index" do
     context "with params[:flight]" do
-      it "assigns all flights matching params to @chosen_flights" do
-        get :index, params: flight_params
+      it "assigns all flights matching params to @flights" do
+        get :index, params: matching_flight
+        expect(assigns(:flights)).to match_array([flight1, flight2])
+      end
 
-        expect(assigns(:chosen_flights)).to match_array([flight1, flight2])
+      it "flashes an error when there are no matching flights" do
+        get :index, params: nonmatching_flight
+        expect(flash[:danger]).to be_present
       end
 
       it "renders the :index template" do
-        get :index, params: flight_params
+        get :index, params: matching_flight
+        expect(response).to render_template(:index)
+      end
+    end
+
+    context "without params[:flight]" do
+      it "renders the :index template" do
+        get :index
         expect(response).to render_template(:index)
       end
     end

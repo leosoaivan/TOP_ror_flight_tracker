@@ -2,13 +2,15 @@ class FlightsController < ApplicationController
 
   def index
     if params[:flight]
-      @chosen_flights = Flight.where(
+      @flights = Flight.where(
         departing_id: params[:flight][:departing_id],
         arriving_id:  params[:flight][:arriving_id],
         date:         Time.zone.parse(params[:flight][:date])
       )
 
-      unless @chosen_flights.nil?
+      if @flights.empty?
+        flash.now[:danger] = "There is no such flight"
+      else
         render :index
       end
     end
