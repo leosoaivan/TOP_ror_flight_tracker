@@ -24,6 +24,7 @@ RSpec.describe Flight, type: :model do
 
   it { should belong_to(:departing).class_name("Airport") }
   it { should belong_to(:arriving).class_name("Airport") }
+  it { should have_many(:passengers).through(:bookings) }
   
   it "is valid with a departing_id and an arriving_id" do
     expect(flight).to be_valid
