@@ -1,1 +1,29 @@
-hello
+<table>
+  <tr>
+    <th>Flight ID</th>
+    <th>Departing</th>
+    <th>Arriving</th>
+    <th>Duration</th>
+  </tr>
+  <tr>
+    <td><%= @flight.id %></td>
+    <td><%= @flight.departing_id %></td>
+    <td><%= @flight.arriving_id %></td>
+    <td><%= @flight.duration %></td>
+  </tr>
+</table>
+
+
+<%= form_for @booking do |f| %>
+  <% @number.times do |n| %>
+    <%= f.fields_for :passengers, @booking.passengers.build do |passengers| %>
+      <p>
+        Passenger <%= n + 1 %>:
+        Full name: <%= passengers.text_field :name %>
+        Email: <%= passengers.text_field :email %>
+      <p>
+    <% end%>
+  <% end %>
+  <%= f.hidden_field "flight_id", value: @flight.id %>
+  <%= f.submit "Book your flight"%>
+<% end %>
