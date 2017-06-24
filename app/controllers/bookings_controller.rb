@@ -14,6 +14,12 @@ class BookingsController < ApplicationController
       redirect_to @booking
     else
       flash.now[:danger] = "#{@booking.errors.messages}"
+
+      permitted_params = booking_params.to_h
+      @booking = Booking.new
+      @flight = Flight.find(permitted_params[:flight_id])
+      @number = permitted_params[:passengers_attributes].count
+
       render :new
     end
   end
@@ -25,7 +31,10 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:flight_id, passengers_attributes:[:id, :name, :email])
+    params.require(:booking).permit(
+      :flight_id,
+      passengers_attributes:[:id, :name, :email]
+    )
   end
   
 end
