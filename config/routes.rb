@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get 'flights', to: 'flights#index'
   get 'bookings/new'
   post 'bookings', to: 'bookings#create'
-  get 'bookings/:id', to: 'bookings#show'
+  get 'bookings/:id', to: 'bookings#show', as: 'booking'
 end

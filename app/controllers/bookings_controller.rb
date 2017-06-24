@@ -7,13 +7,13 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @flight = Flight.find(params[:booking][:flight_id])
+    @flight = Flight.find(booking_params[:flight_id])
     @booking = @flight.bookings.build(booking_params)
     
     if @booking.save
       redirect_to @booking
     else
-      flash.now[:danger] = "#{@booking.errors}"
+      flash.now[:danger] = "#{@booking.errors.messages}"
       render :new
     end
   end

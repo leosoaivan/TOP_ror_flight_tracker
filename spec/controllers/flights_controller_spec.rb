@@ -34,7 +34,7 @@ RSpec.describe FlightsController, type: :controller do
   
   describe "GET #index" do
     context "with params[:flight]" do
-      it "assigns all flights matching params to @flights" do
+      it "assigns all the flights matching params to @flights" do
         get :index, params: matching_flight
         expect(assigns(:flights)).to match_array([flight1, flight2])
       end
