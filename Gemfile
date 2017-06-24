@@ -2,15 +2,16 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.2'
-gem 'sass-rails', '~> 5.0'
+gem 'rails', '5.1.0'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma', '~> 3.4'
+gem 'railties', '~> 5.0', '>= 5.0.0.1'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3', '>= 1.3.13'
