@@ -12,7 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma', '~> 3.4'
 gem 'railties', '~> 5.0', '>= 5.0.0.1'
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'autoprefixer-rails'
 
 group :development, :test do

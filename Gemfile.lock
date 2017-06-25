@@ -227,7 +227,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
-  bootstrap-sass
+  bootstrap-sass (~> 3.3, >= 3.3.6)
   capybara (~> 2.14)
   coffee-rails
   database_cleaner (~> 1.6, >= 1.6.1)
