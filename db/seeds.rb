@@ -8,6 +8,7 @@
 
 Airport.delete_all
 Flight.delete_all
+Booking.delete_all
 
 codes = ["ATL", "ORD", "LAX", "DFW", "JFK", "DEN", "SFO", "LAS", "CLT", "MIA"]
 names = [

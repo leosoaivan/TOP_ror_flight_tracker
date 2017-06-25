@@ -24,7 +24,7 @@
   <% end %>
 <% end %>
 
-<% if @flights %>
+<% unless @flights.nil? || @flights.empty? %>
   <%= form_tag('bookings/new', method: :get) do %>
     <%= hidden_field_tag(:passengers, params[:flight][:passengers]) %>
     <%= collection_radio_buttons(:booking, :flight_id, @flights, :id, :date) do |b| %>
