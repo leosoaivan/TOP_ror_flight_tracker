@@ -9,7 +9,7 @@ class FlightsController < ApplicationController
       )
 
       if @flights.empty?
-        flash.now[:danger] = "There is no such flight"
+        flash.now[:danger] = "Sorry, there is no such flight"
       else
         render :index
       end

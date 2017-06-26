@@ -17,4 +17,8 @@ class Flight < ApplicationRecord
     date.strftime("%m/%d/%Y")
   end
 
+  def flight_time_formatted
+    time.strftime("%l:%M%P")
+  end
+
 end
