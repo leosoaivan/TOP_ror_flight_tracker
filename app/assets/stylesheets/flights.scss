@@ -7,14 +7,12 @@
   margin-bottom: 20px;
 }
 
-.btn {
-  margin-top: 15px;
+.btn-primary {
+  margin-top: 20px;
 }
 
-thead {
-  background-color: lightgrey;
-  font-weight: bold;
-  font-size: 16px;
+.btn-warning {
+  margin-top: 15px;
 }
 
 .flight-radio {
@@ -24,4 +22,10 @@ thead {
 #main-flight-info {
   text-align: center;
   padding-bottom: 10px;
+}
+
+thead {
+  background-color: lightgrey;
+  font-weight: bold;
+  font-size: 16px;
 }
