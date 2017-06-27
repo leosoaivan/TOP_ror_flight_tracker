@@ -7,6 +7,21 @@
   margin-bottom: 20px;
 }
 
-.btn {
+.btn-primary {
   margin-top: 20px;
+}
+
+thead {
+  background-color: lightgrey;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.flight-radio {
+  text-align: center;
+}
+
+#main-flight-info {
+  text-align: center;
+  padding-bottom: 10px;
 }

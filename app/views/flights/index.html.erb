@@ -32,7 +32,7 @@
       Date:
     </label>
     <div class="col-sm-10">
-      <%= collection_select :flight, :date, Flight.distinct_dates, :date, :flight_date_formatted, {}, { type: 'date', class: 'form-control' } %>
+      <%= collection_select :flight, :date, Flight.distinct_dates, :date, :date_formatted, {}, { type: 'date', class: 'form-control' } %>
     <div>
   </div>
 
@@ -48,16 +48,39 @@
 <% end %>
 
 <% unless @flights.blank? %>
+  <hr></hr>
   <%= form_tag('bookings/new', method: :get) do %>
     <%= hidden_field_tag(:passengers, params[:flight][:passengers]) %>
-    <h3>Choose a flight</h3>
-    <div class="form-check-label">
-      <%= collection_radio_buttons(:booking, :flight_id, @flights, :id, :date) do |b| %>
-        <%= b.radio_button %>
-        <%= b.object.flight_date_formatted %> at 
-        <%= b.object.flight_time_formatted %>
-      <% end %>
+    <div id="main-flight-info">
+      <h3>
+        <%= @departing_air.code %> 
+        <span class="glyphicon glyphicon-chevron-right"></span> 
+        <%= @arriving_air.code %>
+      </h3>
+      <h4><%= @flights.first.date_formatted %></h4>
     </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Departing</th>
+          <th>Arriving</th>
+          <th>Duration</th> 
+        </tr>
+      </thead>
+      <tbody>
+        <div class="form-check-label">
+          <%= collection_radio_buttons(:booking, :flight_id, @flights, :id, :date) do |b| %>
+            <trow>
+              <td><%= b.radio_button %></td>
+              <td><%= b.object.time_formatted %></td>
+              <td><%= b.object.arriving_formatted %></td>
+              <td><%= b.object.duration_formatted %></td>
+            </trow>
+          <% end %>
+        </div>
+      </tboby>
+    </table>
     <div class="form-group row">
       <div class='col-sm-12'>
         <%= submit_tag "Accept", 
@@ -66,4 +89,10 @@
       </div>
     </div>
   <% end %>
+  <div class="form-group row">
+    <div class='col-sm-12'>
+      <%= link_to "Clear all", { controller: 'flights', action: 'index' }, 
+        class: "btn btn-warning btn-block" %>
+    </div>
+  </div>
 <% end %>
