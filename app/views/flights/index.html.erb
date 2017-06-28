@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-10 col-xs-offset-1">
     <%= form_tag('/flights', method: 'get', class: "form-horizontal" ) do %>
       <div class="form-group row">
         <label for="origin" class="col-xs-4 col-form-label">
@@ -38,10 +38,12 @@
         </div>
       </div>
       
-      <div class="form-group-row">
-        <%= submit_tag "Find a flight", 
-          { type: "submit",
-            class: "btn btn-primary btn-block" } %>
+      <div class="form-group row">
+        <div class="col-xs-12">
+          <%= submit_tag "Find a flight", 
+            { type: "submit",
+              class: "btn btn-primary btn-block" } %>
+        </div>
       </div>
     <% end %>
   </div>
@@ -49,7 +51,7 @@
 
 <% unless @flights.blank? %>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-10 col-xs-offset-1">
     <hr></hr>
       <div id="main-flight-info">
         <h2>
@@ -63,10 +65,9 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-10 col-xs-offset-1">
       <%= form_tag('bookings/new', method: :get) do %>
         <%= hidden_field_tag(:passengers, params[:flight][:passengers]) %>
-        <div class="form-group-row">
           <table class="table">
             <thead>
               <tr>
@@ -89,8 +90,7 @@
               </div>
             </tboby>
           </table>
-        </div>
-        <div class="form-group-row">
+        <div class="form-group">
           <%= submit_tag "Accept", 
             { type: "submit",
               class: "btn btn-primary btn-block" } %>
@@ -100,8 +100,8 @@
   </div>
 
   <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group-row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="form-group">
         <%= link_to "Clear all", { controller: 'flights', action: 'index' }, 
           class: "btn btn-warning btn-block" %>
       </div>
