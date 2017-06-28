@@ -40,9 +40,9 @@
       
       <div class="form-group row">
         <div class="col-xs-12">
-          <%= submit_tag "Find a flight", 
-            { type: "submit",
-              class: "btn btn-primary btn-block" } %>
+          <%= submit_tag @flights.blank? ? "Find a flight" : "Find another flight", 
+          { type: "submit",
+            class: "btn btn-primary btn-block" } %>
         </div>
       </div>
     <% end %>
@@ -72,8 +72,8 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Departing</th>
-                <th>Arriving</th>
+                <th>Depart</th>
+                <th>Arrive</th>
                 <th>Duration</th> 
               </tr>
             </thead>
@@ -99,12 +99,4 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <div class="form-group">
-        <%= link_to "Clear all", { controller: 'flights', action: 'index' }, 
-          class: "btn btn-warning btn-block" %>
-      </div>
-    </div>
-  </div> 
 <% end %>
