@@ -8,6 +8,17 @@ RSpec.describe BookingsController, type: :controller do
     duration: 250_000
   )}
 
+  let! (:airport1) {Airport.create(
+    name: "Airport 1",
+    code: "Air1"
+  )}
+
+  let! (:airport2) {Airport.create(
+    name: "Airport 2",
+    code: "Air2"
+  )}
+
+
   let (:params) { 
     { booking: { flight_id: '1' },
       passengers: '2' 
@@ -40,15 +51,19 @@ RSpec.describe BookingsController, type: :controller do
     }
   }
 
+  let (:request_variables) { [airport1, airport2] }
+  
+  let (:request_action) { post :create, params: wrong_params }
+
   describe "GET #new" do
     it "assigns the flight matching the params to @flight" do
-      flight1
+      vars = [flight1, airport1, airport2]
       get :new, params: params
       expect(assigns(:flight)).to eql(flight1)
     end
 
     it "assigns the Integer of passengers to @number" do
-      flight1
+      vars = [flight1, airport1, airport2]
       get :new, params: params
       expect(assigns(:number)).to eql(params[:passengers].to_i)
     end
@@ -76,38 +91,38 @@ RSpec.describe BookingsController, type: :controller do
 
     context "with invalid parameters" do
       it "does not create a booking" do
+        request_action
+
         expect{ 
           post :create, params: wrong_params
         }.not_to change(Booking, :count)
       end
 
       it "flashes warning messages" do
-        post :create, params: wrong_params
+        request_action
+
         expect(flash[:danger]).to be_present
       end
 
       it "renders the :new template" do
-        post :create, params: wrong_params
+        request_action
+
         expect(response).to render_template(:new)
       end
 
       it "resets @flight after rendering :new" do
-        post :create, params: wrong_params
+        request_action
+
         expect(assigns(:flight)).to eql(flight1)
       end
 
       it "resets @number after rendering :new" do
         permitted_params = wrong_params.to_h
+        request_action
         
-        post :create, params: wrong_params
         expect(assigns(:number)).
         to eql(permitted_params[:booking][:passengers_attributes].count)
       end
-      
-      
-
     end
-
   end
-
 end

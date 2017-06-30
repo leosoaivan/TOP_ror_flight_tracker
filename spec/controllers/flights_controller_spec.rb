@@ -22,6 +22,12 @@ RSpec.describe FlightsController, type: :controller do
     duration: 255_000
   )}
 
+  let! (:airports) {
+    (1..4).each do |n|
+      Airport.create(name: "Airport #{n}", code: "Air#{n}")
+    end
+  }
+
   let (:matching_flight) { 
     { flight: { departing_id: flight1.departing_id,
                 arriving_id:  flight1.arriving_id, 
