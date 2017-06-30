@@ -16,7 +16,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to @booking
     else
-      flash.now[:danger] = "#{@booking.errors.messages}"
+      flash.now[:danger] = "Passenger information can't be blank"
 
       @booking = Booking.new
       @flight = Flight.find(permitted_params[:flight_id])
