@@ -14,6 +14,7 @@ class BookingsController < ApplicationController
     permitted_params = booking_params.to_h    
 
     if @booking.save
+      flash[:success] = "Your flight has been booked"
       redirect_to @booking
     else
       flash.now[:danger] = "Passenger information can't be blank"
@@ -30,6 +31,10 @@ class BookingsController < ApplicationController
 
   def show
     @booking = Booking.find(params[:id])
+    @flight = Flight.find(@booking.flight_id)
+    @departing_air = Airport.find(@flight.departing_id)
+    @arriving_air = Airport.find(@flight.arriving_id)
+    @confirmation
   end
 
   private
@@ -40,5 +45,6 @@ class BookingsController < ApplicationController
       passengers_attributes:[:id, :name, :email]
     )
   end
+
   
 end

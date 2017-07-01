@@ -1,3 +1,28 @@
-<% @booking.passengers.each do |p| %>
-  <%= p.name %>
-<% end %>
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <div id="main-flight-info">
+      <h2>
+        <%= @departing_air.code %> 
+        <span class="glyphicon glyphicon-chevron-right"></span> 
+        <%= @arriving_air.code %>
+      </h2>
+      <h4>Flight #<%= @flight.id %> on <%= @flight.date_formatted %></h4>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <div id="confirmation" class="jumbotron">
+      <h2>Congratulations!</h2>
+        <p>Your flight has succesfully been booked. Please check your email for further details.</p>
+        <p>
+          <%= link_to(
+            "Take me home!", 
+            root_url,
+            { form_class: "btn btn-primary btn-lg" }) %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
