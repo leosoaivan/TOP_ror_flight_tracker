@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Passenger, type: :model do
-  let(:passenger) { Passenger.new(name: "LPSV", email: "example@email.com") }
+  let(:booking) { Booking.new }
+  let(:passenger) { 
+    booking.passengers.build(name: "LPSV", email: "example@email.com")
+  }
 
   it { should belong_to(:booking) }
 

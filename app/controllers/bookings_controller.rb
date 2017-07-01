@@ -4,8 +4,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @flight = Flight.find(params[:booking][:flight_id])
     @number = params[:passengers].to_i
-    @departing_air = Airport.find(@flight.departing_id)
-    @arriving_air = Airport.find(@flight.arriving_id)
+    @airports = @booking.relevant_airports(@flight)
   end
 
   def create
@@ -14,7 +13,6 @@ class BookingsController < ApplicationController
     permitted_params = booking_params.to_h    
 
     if @booking.save
-      flash[:success] = "Your flight has been booked"
       redirect_to @booking
     else
       flash.now[:danger] = "Passenger information can't be blank"
@@ -22,8 +20,7 @@ class BookingsController < ApplicationController
       @booking = Booking.new
       @flight = Flight.find(permitted_params[:flight_id])
       @number = permitted_params[:passengers_attributes].count
-      @departing_air = Airport.find(@flight.departing_id)
-      @arriving_air = Airport.find(@flight.arriving_id)
+      @airports = @booking.relevant_airports(@flight)
 
       render :new
     end
@@ -32,9 +29,7 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find(params[:id])
     @flight = Flight.find(@booking.flight_id)
-    @departing_air = Airport.find(@flight.departing_id)
-    @arriving_air = Airport.find(@flight.arriving_id)
-    @confirmation
+    @airports = @booking.relevant_airports(@flight)
   end
 
   private
