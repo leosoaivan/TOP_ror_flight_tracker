@@ -10,10 +10,14 @@ class BookingsController < ApplicationController
   def create
     @flight = Flight.find(booking_params[:flight_id])
     @booking = @flight.bookings.build(booking_params)
-    permitted_params = booking_params.to_h    
+    permitted_params = booking_params.to_h
+    @passengers = permitted_params[:passengers_attributes]
 
     if @booking.save
       redirect_to @booking
+      @passengers.each_value do |passenger|
+        ConfirmationMailer.confirmation_email(passenger).deliver_now
+      end
     else
       flash.now[:danger] = "Passenger information can't be blank"
 
