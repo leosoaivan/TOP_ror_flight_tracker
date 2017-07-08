@@ -28,14 +28,13 @@ codes.size.times do |count|
   Airport.create(code: "#{codes[count]}", name: "#{names[count]}")
 end
 
-100.times do |count|
-  airports = Airport.all.sample(2)
-  Flight.create(
-    departing: airports.first,
-    arriving: airports.second,
-    duration: 21_600 + rand(1000) * 10,
-    date: DateTime.new(2017, 12, 20) + rand(5).day,
-    time: Time.new + rand(24).hour
-  )
-end
+airport_pairs = Airport.all.to_a.permutation(2).to_a
 
+airport_pairs.each do |pair|
+  5.times { Flight.create(departing: pair[0],
+                          arriving: pair[1],
+                          duration: 21_600 + rand(1000) * 10,
+                          date: DateTime.new(2017, 12, 20) + rand(5).day,
+                          time: Time.new + rand(24).hour)
+  }
+end
