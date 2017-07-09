@@ -1,102 +1,112 @@
 <div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
-    <%= form_tag('/flights', method: 'get', class: "form-horizontal" ) do %>
-      <div class="form-group row">
-        <label for="origin" class="col-xs-4 col-form-label">
-          Origin:
-        </label>
-        <div class="col-xs-8">
-          <%= collection_select :flight, :departing_id, Airport.all, :id, :code,{},
-          { type: 'text', class: "form-control"} %>
-        </div>
-      </div>
+  <div id="finder" class="col-xs-10 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <%= form_tag('/flights', method: 'get', class: "form-horizontal" ) do %>
+          <div class="form-group row">
+            <label for="origin" class="col-xs-4 col-form-label">
+              Origin:
+            </label>
+            <div class="col-xs-8">
+              <%= collection_select :flight, :departing_id, Airport.all, :id, :code,{},
+              { type: 'text', class: "form-control"} %>
+            </div>
+          </div>
 
-      <div class="form-group row">
-        <label for="destination" class="col-xs-4 col-form-label">
-          Destination:
-        </label> 
-        <div class="col-xs-8">
-          <%= collection_select :flight, :arriving_id, Airport.all, :id, :code, {}, { type: 'text', class: "form-control"} %>
-        </div>
-      </div>
+          <div class="form-group row">
+            <label for="destination" class="col-xs-4 col-form-label">
+              Destination:
+            </label> 
+            <div class="col-xs-8">
+              <%= collection_select :flight, :arriving_id, Airport.all, :id, :code, {}, { type: 'text', class: "form-control"} %>
+            </div>
+          </div>
 
-      <div class="form-group row">
-        <label for="passengers" class="col-xs-4">
-          Passengers:
-        </label>
-        <div class="col-xs-8">
-          <%= select :flight, :passengers, (1..5), {}, { class: "form-control" } %>
-        </div>
-      </div>
+          <div class="form-group row">
+            <label for="passengers" class="col-xs-4">
+              Passengers:
+            </label>
+            <div class="col-xs-8">
+              <%= select :flight, :passengers, (1..5), {}, { class: "form-control" } %>
+            </div>
+          </div>
 
-      <div class="form-group row">
-        <label for="date" class="col-xs-4">
-          Date:
-        </label>
-        <div class="col-xs-8">
-          <%= collection_select :flight, :date, Flight.distinct_dates, :date, :date_formatted, {}, { type: 'date', class: 'form-control' } %>
-        </div>
+          <div class="form-group row">
+            <label for="date" class="col-xs-4">
+              Date:
+            </label>
+            <div class="col-xs-8">
+              <%= collection_select :flight, :date, Flight.distinct_dates, :date, :date_formatted, {}, { type: 'date', class: 'form-control' } %>
+            </div>
+          </div>
+          
+          <div class="form-group row">
+            <div class="col-xs-12">
+              <%= submit_tag @flights.blank? ? "Find a flight" : "Find another flight", 
+              { type: "submit",
+                class: "btn btn-primary btn-block" } %>
+            </div>
+          </div>
+        <% end %>
       </div>
-      
-      <div class="form-group row">
-        <div class="col-xs-12">
-          <%= submit_tag @flights.blank? ? "Find a flight" : "Find another flight", 
-          { type: "submit",
-            class: "btn btn-primary btn-block" } %>
-        </div>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
 
+
 <% unless @flights.blank? %>
+  <hr></hr>
   <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-    <hr></hr>
-      <div id="main-flight-info">
-        <h2>
-          <%= @departing_air.code %> 
-          <span class="glyphicon glyphicon-chevron-right"></span> 
-          <%= @arriving_air.code %>
-        </h2>
-        <h4><%= @flights.first.date_formatted %></h4>
+    <div id="flight-info" class="col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div id="main-flight-info">
+            <h2>
+              <%= @departing_air.code %> 
+              <span class="glyphicon glyphicon-chevron-right"></span> 
+              <%= @arriving_air.code %>
+            </h2>
+            <h4><%= @flights.first.date_formatted %></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="results" class="col-xs-10 col-xs-offset-1">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+          <%= form_tag('bookings/new', method: :get) do %>
+            <%= hidden_field_tag(:passengers, params[:flight][:passengers]) %>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Depart</th>
+                    <th>Arrive</th>
+                    <th>Duration</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                  <div class="form-check-label">
+                    <%= collection_radio_buttons(:booking, :flight_id, @flights, :id, :date, { checked: @flights.first.id }) do |b| %>
+                      <tr>
+                        <td><%= b.radio_button %></td>
+                        <td><%= b.object.time_formatted %></td>
+                        <td><%= b.object.arriving_formatted %></td>
+                        <td><%= b.object.duration_formatted %></td>
+                      </tr>
+                    <% end %>
+                  </div>
+                </tboby>
+              </table>
+            <div class="form-group">
+              <%= submit_tag "Accept", 
+                { type: "submit",
+                  class: "btn btn-primary btn-block" } %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="row">
-    <div class="col-xs-10 col-xs-offset-1">
-      <%= form_tag('bookings/new', method: :get) do %>
-        <%= hidden_field_tag(:passengers, params[:flight][:passengers]) %>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Depart</th>
-                <th>Arrive</th>
-                <th>Duration</th> 
-              </tr>
-            </thead>
-            <tbody>
-              <div class="form-check-label">
-                <%= collection_radio_buttons(:booking, :flight_id, @flights, :id, :date, { checked: @flights.first.id }) do |b| %>
-                  <trow>
-                    <td><%= b.radio_button %></td>
-                    <td><%= b.object.time_formatted %></td>
-                    <td><%= b.object.arriving_formatted %></td>
-                    <td><%= b.object.duration_formatted %></td>
-                  </trow>
-                <% end %>
-              </div>
-            </tboby>
-          </table>
-        <div class="form-group">
-          <%= submit_tag "Accept", 
-            { type: "submit",
-              class: "btn btn-primary btn-block" } %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
 <% end %>

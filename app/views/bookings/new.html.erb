@@ -1,72 +1,79 @@
 <div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
-    <div id="main-flight-info">
-      <h2>
-        <%= @airports[:departing].code %> 
-        <span class="glyphicon glyphicon-chevron-right"></span> 
-        <%= @airports[:arriving].code %>
-      </h2>
-      <h4>Flight #<%= @flight.id %> on <%= @flight.date_formatted %></h4>
+  <div id="flight-info" class="col-xs-10 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <div id="main-flight-info">
+          <h2>
+            <%= @airports[:departing].code %> 
+            <span class="glyphicon glyphicon-chevron-right"></span> 
+            <%= @airports[:arriving].code %>
+          </h2>
+          <h4>Flight #<%= @flight.id %> on <%= @flight.date_formatted %></h4>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Depart</th>
-          <th>Arrive</th>
-          <th>Duration</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= @flight.id %></td>
-          <td><%= @flight.time_formatted %></td>
-          <td><%= @flight.arriving_formatted %></td>
-          <td><%= @flight.duration_formatted %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
-    <%= form_for @booking do |f| %>
-      <% @number.times do |n| %>
-        <%= f.fields_for :passengers, @booking.passengers.build do |passengers| %>
-        <div id="passenger-info">
-          <div class="row">
-            <div class="col-xs-10 col-xs-offset-1">
-              <h4>Passenger <%= n + 1 %>:</h4>
-              <div class="form-group">
-                <label for="PassengerName" class="col-form-label">
-                  Full Name
-                </label>
-                <%= passengers.text_field(:name, class: "form-control") %>
-              </div>
-
-              <div class="form-group">
-                <label for="PassengerEmail" class="col-form-label">
-                  Email
-                </label>
-                <%= passengers.text_field(:email, class: "form-control") %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% end%>
-      <% end %>
-      <%= f.hidden_field "flight_id", value: @flight.id %>
-      <div>
-        <%= f.submit "Book your flight", 
-          { type: "submit",
-            class: "btn btn-primary btn-block" } %>
+  <div id="booking" class="col-xs-10 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Depart</th>
+              <th>Arrive</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @flight.id %></td>
+              <td><%= @flight.time_formatted %></td>
+              <td><%= @flight.arriving_formatted %></td>
+              <td><%= @flight.duration_formatted %></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-    <% end %>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1">
+        <%= form_for @booking do |f| %>
+          <% @number.times do |n| %>
+            <%= f.fields_for :passengers, @booking.passengers.build do |passengers| %>
+              <div id="passenger-info">
+                <div class="row">
+                  <div class="col-xs-10 col-xs-offset-1">
+                    <h4>Passenger <%= n + 1 %>:</h4>
+                    <div class="form-group">
+                      <label for="PassengerName" class="col-form-label">
+                        Full Name
+                      </label>
+                      <%= passengers.text_field(:name, class: "form-control") %>
+                    </div>
+                    <div class="form-group">
+                      <label for="PassengerEmail" class="col-form-label">
+                        Email
+                      </label>
+                      <%= passengers.text_field(:email, class: "form-control") %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end%>
+          <% end %>
+          <%= f.hidden_field "flight_id", value: @flight.id %>
+          <div class="form-group">
+            <%= f.submit "Book your flight", 
+              { type: "submit",
+                class: "btn btn-primary btn-block" } %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
