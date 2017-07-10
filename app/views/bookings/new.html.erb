@@ -1,5 +1,5 @@
 <div class="row">
-  <div id="flight-info" class="col-xs-10 col-xs-offset-1">
+  <div id="flight-info" class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1">
         <div id="main-flight-info">
@@ -16,20 +16,22 @@
 </div>
 
 <div class="row">
-  <div id="booking" class="col-xs-10 col-xs-offset-1">
+  <div id="booking" class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1">
-        <table class="table">
+        <table id="booking" class="table table-condensed">
           <thead>
             <tr>
-              <th>#</th>
+              <th id="extra"></th>
+              <th>Flight #</th>
               <th>Depart</th>
               <th>Arrive</th>
               <th>Duration</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr id="mini">
+              <td id="extra"></td>
               <td><%= @flight.id %></td>
               <td><%= @flight.time_formatted %></td>
               <td><%= @flight.arriving_formatted %></td>
@@ -45,22 +47,24 @@
         <%= form_for @booking do |f| %>
           <% @number.times do |n| %>
             <%= f.fields_for :passengers, @booking.passengers.build do |passengers| %>
-              <div id="passenger-info">
-                <div class="row">
-                  <div class="col-xs-10 col-xs-offset-1">
-                    <h4>Passenger <%= n + 1 %>:</h4>
-                    <div class="form-group">
-                      <label for="PassengerName" class="col-form-label">
-                        Full Name
-                      </label>
-                      <%= passengers.text_field(:name, class: "form-control") %>
-                    </div>
-                    <div class="form-group">
-                      <label for="PassengerEmail" class="col-form-label">
-                        Email
-                      </label>
-                      <%= passengers.text_field(:email, class: "form-control") %>
-                    </div>
+              <div id="passenger-info" class="form-horizontal">
+                <h4>Passenger <%= n + 1 %>:</h4>
+                
+                <div class="form-group">
+                  <label for="PassengerName" class="col-sm-3 col-lg-2">
+                    Full Name
+                  </label>
+                  <div class="col-sm-9 col-lg-10">
+                    <%= passengers.text_field(:name, class: "form-control") %>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="PassengerEmail" class="col-sm-3 col-lg-2">
+                    Email
+                  </label>
+                  <div class="col-sm-9 col-lg-10">
+                    <%= passengers.text_field(:email, class: "form-control") %>
                   </div>
                 </div>
               </div>

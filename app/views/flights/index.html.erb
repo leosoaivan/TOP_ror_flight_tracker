@@ -1,46 +1,46 @@
 <div class="row">
-  <div id="finder" class="col-xs-10 col-xs-offset-1">
+  <div id="finder" class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
     <div class="row">
       <div class="col-xs-10 col-xs-offset-1">
         <%= form_tag('/flights', method: 'get', class: "form-horizontal" ) do %>
-          <div class="form-group row">
-            <label for="origin" class="col-xs-4 col-form-label">
+          <div class="form-group">
+            <label for="origin" class="col-lg-3">
               Origin:
             </label>
-            <div class="col-xs-8">
+            <div class="col-lg-9">
               <%= collection_select :flight, :departing_id, Airport.all, :id, :code,{},
               { type: 'text', class: "form-control"} %>
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="destination" class="col-xs-4 col-form-label">
+          <div class="form-group">
+            <label for="destination" class="col-lg-3">
               Destination:
             </label> 
-            <div class="col-xs-8">
+            <div class="col-lg-9">
               <%= collection_select :flight, :arriving_id, Airport.all, :id, :code, {}, { type: 'text', class: "form-control"} %>
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="passengers" class="col-xs-4">
+          <div class="form-group">
+            <label for="passengers" class="col-lg-3">
               Passengers:
             </label>
-            <div class="col-xs-8">
+            <div class="col-lg-9">
               <%= select :flight, :passengers, (1..5), {}, { class: "form-control" } %>
             </div>
           </div>
 
-          <div class="form-group row">
-            <label for="date" class="col-xs-4">
+          <div class="form-group">
+            <label for="date" class="col-lg-3">
               Date:
             </label>
-            <div class="col-xs-8">
+            <div class="col-lg-9">
               <%= collection_select :flight, :date, Flight.distinct_dates, :date, :date_formatted, {}, { type: 'date', class: 'form-control' } %>
             </div>
           </div>
           
-          <div class="form-group row">
+          <div class="form-group">
             <div class="col-xs-12">
               <%= submit_tag @flights.blank? ? "Find a flight" : "Find another flight", 
               { type: "submit",
@@ -57,7 +57,7 @@
 <% unless @flights.blank? %>
   <hr></hr>
   <div class="row">
-    <div id="flight-info" class="col-xs-10 col-xs-offset-1">
+    <div id="flight-info" class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
           <div id="main-flight-info">
@@ -72,31 +72,33 @@
       </div>
     </div>
 
-    <div id="results" class="col-xs-10 col-xs-offset-1">
+    <div id="results" class="col-xs-10 col-xs-offset-1 col-lg-8 col-lg-offset-2">
       <div class="row">
         <div class="col-xs-10 col-xs-offset-1">
           <%= form_tag('bookings/new', method: :get) do %>
             <%= hidden_field_tag(:passengers, params[:flight][:passengers]) %>
-              <table class="table">
+              <table id="flight" class="table table-condensed">
                 <thead>
                   <tr>
-                    <th>#</th>
+                    <th></th>
+                    <th>Flight #</th>
                     <th>Depart</th>
                     <th>Arrive</th>
                     <th>Duration</th> 
                   </tr>
                 </thead>
                 <tbody>
-                  <div class="form-check-label">
+                  <%#<div class="form-check-label">%>
                     <%= collection_radio_buttons(:booking, :flight_id, @flights, :id, :date, { checked: @flights.first.id }) do |b| %>
-                      <tr>
+                      <tr id="mini">
                         <td><%= b.radio_button %></td>
+                        <td><%= b.object.id %></td>
                         <td><%= b.object.time_formatted %></td>
                         <td><%= b.object.arriving_formatted %></td>
                         <td><%= b.object.duration_formatted %></td>
                       </tr>
                     <% end %>
-                  </div>
+                  <%#</div>%>
                 </tboby>
               </table>
             <div class="form-group">
