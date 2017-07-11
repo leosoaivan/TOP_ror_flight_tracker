@@ -3,8 +3,8 @@ class CreateFlights < ActiveRecord::Migration[5.0]
     create_table :flights do |t|
       t.datetime :date
       t.time :duration
-      t.references :departing, foreign_key: true
-      t.references :arriving, foreign_key: true
+      t.references :departings, foreign_key: true
+      t.references :arrivings, foreign_key: true
 
       t.timestamps
     end
