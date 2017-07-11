@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 20170620220054) do
 
   create_table "airports", force: :cascade do |t|
-    t.string   "code"
-    t.string   "name"
+    t.string "code"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -22,28 +22,28 @@ ActiveRecord::Schema.define(version: 20170620220054) do
   create_table "bookings", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "flight_id"
+    t.integer "flight_id"
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
   end
 
   create_table "flights", force: :cascade do |t|
     t.datetime "date"
-    t.integer  "duration"
-    t.integer  "departing_id"
-    t.integer  "arriving_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.integer "duration"
+    t.integer "departing_id"
+    t.integer "arriving_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.datetime "time"
     t.index ["arriving_id"], name: "index_flights_on_arriving_id"
     t.index ["departing_id"], name: "index_flights_on_departing_id"
   end
 
   create_table "passengers", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string "name"
+    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "booking_id"
+    t.integer "booking_id"
     t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
