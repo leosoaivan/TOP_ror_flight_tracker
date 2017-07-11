@@ -12,9 +12,9 @@ N/A
 
 ## Running the tests
 1. Make sure you have RSpec installed
-`gem install rspec`
+    `gem install rspec`
 2. Run the tests!
-`$ rspec`
+    `$ rspec`
 
 ## Deployment
 TO-DO
