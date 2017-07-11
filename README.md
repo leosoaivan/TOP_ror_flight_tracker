@@ -11,7 +11,10 @@ N/A
 N/A
 
 ## Running the tests
-TO-DO
+1. Make sure you have RSpec installed
+`gem install rspec`
+2. Run the tests!
+`$ rspec`
 
 ## Deployment
 TO-DO
