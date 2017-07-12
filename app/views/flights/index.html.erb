@@ -8,7 +8,7 @@
               Origin:
             </label>
             <div class="col-lg-9">
-              <%= collection_select :flight, :departing_id, Airport.all, :id, :code,{},
+              <%= collection_select :flight, :departing_id, Airport.all, :id, :code_with_name, {},
               { type: 'text', class: "form-control"} %>
             </div>
           </div>
@@ -18,7 +18,7 @@
               Destination:
             </label> 
             <div class="col-lg-9">
-              <%= collection_select :flight, :arriving_id, Airport.all, :id, :code, {}, { type: 'text', class: "form-control"} %>
+              <%= collection_select :flight, :arriving_id, Airport.all, :id, :code_with_name, {}, { type: 'text', class: "form-control"} %>
             </div>
           </div>
 
