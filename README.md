@@ -29,8 +29,9 @@ TO-DO
 * [Bootstrap](http://getbootstrap.com/) - CSS framework
 
 ## To complete
-* Refactoring views into partials
-* Refactoring CSS
+* Refactor views into partials
+* Refactor CSS
+* Create production confirmation mailer, perhaps through Devise
 
 ## Contributing
 1. Fork it!
