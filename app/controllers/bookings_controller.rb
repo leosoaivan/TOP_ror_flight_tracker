@@ -15,9 +15,9 @@ class BookingsController < ApplicationController
 
     if @booking.save
       redirect_to @booking
-      @passengers.each_value do |passenger|
-        ConfirmationMailer.confirmation_email(passenger).deliver_now
-      end
+      # @passengers.each_value do |passenger|
+      #   ConfirmationMailer.confirmation_email(passenger).deliver_now
+      # end
     else
       flash.now[:danger] = "Passenger information can't be blank"
 
