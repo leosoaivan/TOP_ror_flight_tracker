@@ -14,6 +14,7 @@ gem 'puma', '~> 3.4'
 gem 'railties', '~> 5.0', '>= 5.0.0.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'autoprefixer-rails'
+gem 'figaro', '~> 1.1'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.3', '>= 1.3.13'
@@ -26,6 +27,7 @@ group :development do
   gem 'listen', '~> 3.1', '>= 3.1.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
+  gem 'letter_opener', '~> 1.4'
 end
 
 group :test do
