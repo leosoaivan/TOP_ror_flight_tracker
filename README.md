@@ -27,11 +27,12 @@ TO-DO
 * [Ruby on Rails](http://rubyonrails.org/) - Web framework
 * [Rspec](http://rspec.info) - Test suite
 * [Bootstrap](http://getbootstrap.com/) - CSS framework
+* [Heroku](https://www.heroku.com/home) - Cloud platform/server
+* [SendGrid](https://sendgrid.com/) - Email delivery service
 
 ## To complete
 * Refactor views into partials
 * Refactor CSS
-* Create production confirmation mailer, perhaps through Devise
 
 ## Contributing
 1. Fork it!
