@@ -6,5 +6,3 @@ class ConfirmationMailer < ApplicationMailer
     mail(to: @passenger[:email], subject: 'CONFIRMATION: Congrats on booking your flight!')
   end
 end
-
-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
